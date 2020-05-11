@@ -99,3 +99,7 @@ The consortium includes
 - Nick Loman (Institute of Microbiology and Infection, University of Birmingham) [DNA]
 - Jared Simpson (Ontario Institute for Cancer Research) [DNA]
 - Alan Phillippy (Head of the Genome Informatics Section, University of Maryland) [DNA]
+
+## Copyright and licence
+
+The workflow is distributed under the GNU GPL licence version 3. The workflow contains the [MView](https://desmid.github.io/mview) source code as a `.tar.gz` file, which is distributed under the GNU GPL license version version 2 or higher.
