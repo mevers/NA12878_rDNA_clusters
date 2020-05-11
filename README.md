@@ -1,5 +1,7 @@
 # rDNA clusters in the NA12878 consortium human genome assembly
 
+Version: 0.0.9000 (11 May 2020)  
+Author: Maurits Evers (maurits.evers@gmail.com)
 
 ## Workflow
 
@@ -16,7 +18,9 @@ the 3' end is given by 5' start coordinate plus the average length of the
 preceding rDNA units. This information defines a list of putative rDNA loci in
 the assembly. We use this list to extract the corresponding sequences from the
 assembly.
-5. Perform a multiple sequence alignment of the putative rDNA sequences.
+5. Perform a multiple sequence alignment of the putative rDNA sequences using
+[`Clustal Omega`](https://www.ebi.ac.uk/Tools/msa/clustalo/) and visualise
+results using [`MView`](https://www.ebi.ac.uk/Tools/msa/mview/).
 
 Requirements and dependencies:
 
@@ -24,6 +28,16 @@ Requirements and dependencies:
 `00_ref_sequences/assembly/albacore_canu_wtdbg_nanopolish2.fasta`.
 - The U13369.1 human rDNA sequence as a FASTA file, stored in
 `00_ref_sequences/rDNA_GenBank/U13369.1.fa`
+- Gzip'ed FASTA files of the fragmented rDNA in
+`02_rDNA_frags/rDNA_frags_len500_step500.fa.gz` and
+`02_rDNA_frags/rDNA_frags_len1000_step1000.fa.gz` (see below).
+
+
+The current workflow consists of separate shell and R scripts in the individual
+main folders; for example `01_bowtie2_ref` has a shell script
+[`do_indexing.sh`](01_bowtie2_ref/do_indexing.sh) that builds the `bowtie2`
+index. A future version of the workflow will automate and robustify processes
+using `snakemake`.
 
 
 ## The NA12878 reference assembly
@@ -60,10 +74,10 @@ Further details and references:
 We use the human ribosomal DNA complete repeating unit
 [U13369.1](https://www.ncbi.nlm.nih.gov/nuccore/555853)
 and fragment the sequence into L = 500 bp and 1000 bp long non-overlapping  
-subsequences. The resulting FASTA files of rDNA fragments are
-`02_rDNA_frags/rDNA_frags_len500_step500.fa.gz` and
-`02_rDNA_frags/rDNA_frags_len1000_step1000.fa.gz`.
-
+subsequences. The workflow does not generate these files, and instead
+requires these files to be already present; they are generated as part of the
+publicly available `snakemake`-based workflow
+[frag_align_rDNA](https://github.com/mevers/frag_align_rDNA).
 
 
 ## TODO

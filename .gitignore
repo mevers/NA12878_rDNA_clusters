@@ -1,0 +1,3 @@
+00_ref_sequences/assembly/*
+01_bowtie2_ref/*.bt2
+.DS_Store
