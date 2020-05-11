@@ -103,3 +103,5 @@ The consortium includes
 ## Copyright and licence
 
 The workflow is distributed under the GNU GPL licence version 3. The workflow contains the [MView](https://desmid.github.io/mview) source code as a `.tar.gz` file, which is distributed under the GNU GPL license version version 2 or higher.
+
+The [NA12878 data is released under the Create Commons CC-BY licence](https://github.com/nanopore-wgs-consortium/NA12878/blob/master/Genome.md#data-reuse-and-license).
