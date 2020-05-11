@@ -11,6 +11,8 @@ The current workflow performs the following steps:
 2. Align the 500 bp and 1000 bp long rDNA fragments to the NA12878 assembly.
 Store results as BAM, BigWig and BED files.
 3. Plot the number of fragment hits across the assembly's contigs.
+<img src="./04_rDNA_copies/rDNA_frag_hits.png" width="600">
+
 4. Determine the loci where the first 500 bp rDNA fragment maps to; these loci
 define the 5' start of an rDNA unit in the assembly; the 3' end is defined as
 the 5' start of the next rDNA unit. If it is the last rDNA unit in a cluster
@@ -18,6 +20,8 @@ the 3' end is given by 5' start coordinate plus the average length of the
 preceding rDNA units. This information defines a list of putative rDNA loci in
 the assembly. We use this list to extract the corresponding sequences from the
 assembly.
+<img src="rDNA_unit_def.png" width="600">
+
 5. Perform a multiple sequence alignment of the putative rDNA sequences using
 [`Clustal Omega`](https://www.ebi.ac.uk/Tools/msa/clustalo/) and visualise
 results using [`MView`](https://www.ebi.ac.uk/Tools/msa/mview/).
