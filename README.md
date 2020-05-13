@@ -8,18 +8,19 @@ Author: Maurits Evers (maurits.evers@gmail.com)
 The current workflow performs the following steps:
 
 1. Build a `bowtie2` index from the NA12878 assembly.
-2. Align the 500 bp and 1000 bp long rDNA fragments to the NA12878 assembly.
-Store results as BAM, BigWig and BED files.
+2. Based on the U13369.1 rDNA reference sequence, align 500 bp long rDNA
+fragments and sequences based on the transcribed rDNA regions to the NA12878
+assembly. Store results as BAM, BigWig and BED files.
 3. Plot the number of fragment hits across the assembly's contigs.
     <img src="./04_rDNA_copies/rDNA_frag_hits.png" width="600">
 
-4. Determine the loci where the first 500 bp rDNA fragment maps to; these loci
-define the 5' start of an rDNA unit in the assembly; the 3' end is defined as
-the 5' start of the next rDNA unit. If it is the last rDNA unit in a cluster
-the 3' end is given by 5' start coordinate plus the average length of the
-preceding rDNA units. This information defines a list of putative rDNA loci in
-the assembly. We use this list to extract the corresponding sequences from the
-assembly.
+4. Determine the loci where the first 500 bp rDNA fragment (or 5'ETS sequence)
+maps to; these loci define the 5' start of an rDNA unit in the assembly; the 3'
+end is defined as the 5' start of the next rDNA unit. If it is the last rDNA
+unit in a cluster the 3' end is given by 5' start coordinate plus the average
+length of the preceding rDNA units. This information defines a list of putative
+rDNA loci in the assembly. We use this list to extract the corresponding
+sequences from the assembly.
     <img src="rDNA_unit_def.png" width="600">
 
 5. Perform a multiple sequence alignment of the putative rDNA sequences using
@@ -43,9 +44,8 @@ using `snakemake`.
 `00_ref_sequences/assembly/albacore_canu_wtdbg_nanopolish2.fasta`.
 - The U13369.1 human rDNA sequence as a FASTA file, stored in
 `00_ref_sequences/rDNA_GenBank/U13369.1.fa`.
-- Gzip'ed FASTA files of the fragmented rDNA in
-`02_rDNA_frags/rDNA_frags_len500_step500.fa.gz` and
-`02_rDNA_frags/rDNA_frags_len1000_step1000.fa.gz` (see below).
+- Gzip'ed FASTA file of the fragmented rDNA in
+`02_rDNA_frags/rDNA_frags_len500_step500.fa.gz` (see below).
 - Annotation file of the transcribed regions in the U13369.1 rDNA sequence as
 a BED file in `02_rDNA_frags/U13369.1_transcribed.bed`.
 
@@ -97,10 +97,10 @@ Further details and references:
 
 We use the human ribosomal DNA complete repeating unit
 [U13369.1](https://www.ncbi.nlm.nih.gov/nuccore/555853)
-and fragment the sequence into L = 500 bp and 1000 bp long non-overlapping  
-subsequences. The workflow does not generate these files, and instead
-requires these files to be already present; they are generated as part of the
-publicly available `snakemake`-based workflow
+and fragment the sequence into 500 bp long non-overlapping subsequences. The
+workflow does not generate these files, and instead requires these files to be
+already present; they are generated as part of the publicly available
+`snakemake`-based workflow
 [frag_align_rDNA](https://github.com/mevers/frag_align_rDNA).
 
 
