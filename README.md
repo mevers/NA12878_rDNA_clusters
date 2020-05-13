@@ -1,6 +1,6 @@
 # rDNA clusters in the NA12878 consortium human genome assembly
 
-Version: 0.0.9000 (11 May 2020)  
+Version: 0.0.9000 (13 May 2020)  
 Author: Maurits Evers (maurits.evers@gmail.com)
 
 ## Workflow
@@ -11,7 +11,7 @@ The current workflow performs the following steps:
 2. Align the 500 bp and 1000 bp long rDNA fragments to the NA12878 assembly.
 Store results as BAM, BigWig and BED files.
 3. Plot the number of fragment hits across the assembly's contigs.
-<img src="./04_rDNA_copies/rDNA_frag_hits.png" width="600">
+    <img src="./04_rDNA_copies/rDNA_frag_hits.png" width="600">
 
 4. Determine the loci where the first 500 bp rDNA fragment maps to; these loci
 define the 5' start of an rDNA unit in the assembly; the 3' end is defined as
@@ -20,28 +20,48 @@ the 3' end is given by 5' start coordinate plus the average length of the
 preceding rDNA units. This information defines a list of putative rDNA loci in
 the assembly. We use this list to extract the corresponding sequences from the
 assembly.
-<img src="rDNA_unit_def.png" width="600">
+    <img src="rDNA_unit_def.png" width="600">
 
 5. Perform a multiple sequence alignment of the putative rDNA sequences using
-[`Clustal Omega`](https://www.ebi.ac.uk/Tools/msa/clustalo/) and visualise
-results using [`MView`](https://www.ebi.ac.uk/Tools/msa/mview/).
+`Clustal Omega` and visualise results using `MView`.
 
-Requirements and dependencies:
-
-- The NA12828 reference assembly FASTA file, stored in
-`00_ref_sequences/assembly/albacore_canu_wtdbg_nanopolish2.fasta`.
-- The U13369.1 human rDNA sequence as a FASTA file, stored in
-`00_ref_sequences/rDNA_GenBank/U13369.1.fa`
-- Gzip'ed FASTA files of the fragmented rDNA in
-`02_rDNA_frags/rDNA_frags_len500_step500.fa.gz` and
-`02_rDNA_frags/rDNA_frags_len1000_step1000.fa.gz` (see below).
-
+6. Show hits of transcribed rDNA regions across the assembly's contigs using
+`pygenometracks`.
 
 The current workflow consists of separate shell and R scripts in the individual
 main folders; for example `01_bowtie2_ref` has a shell script
 [`do_indexing.sh`](01_bowtie2_ref/do_indexing.sh) that builds the `bowtie2`
 index. A future version of the workflow will automate and robustify processes
 using `snakemake`.
+
+
+## Requirements and dependencies
+
+### Data
+
+- The NA12828 reference assembly FASTA file, stored in
+`00_ref_sequences/assembly/albacore_canu_wtdbg_nanopolish2.fasta`.
+- The U13369.1 human rDNA sequence as a FASTA file, stored in
+`00_ref_sequences/rDNA_GenBank/U13369.1.fa`.
+- Gzip'ed FASTA files of the fragmented rDNA in
+`02_rDNA_frags/rDNA_frags_len500_step500.fa.gz` and
+`02_rDNA_frags/rDNA_frags_len1000_step1000.fa.gz` (see below).
+- Annotation file of the transcribed regions in the U13369.1 rDNA sequence as
+a BED file in `02_rDNA_frags/U13369.1_transcribed.bed`.
+
+### Software
+
+- [bedtools](https://bedtools.readthedocs.io/en/latest/); tested with
+`bedtools_2.26.0`
+- [bowtie2](http://bowtie-bio.sourceforge.net/bowtie2/index.shtml); tested with
+`bowtie2_2.3.5.1`
+- [Clustal Omega](https://www.ebi.ac.uk/Tools/msa/clustalo/); tested with
+`clustalo_1.2.4`
+- [MView](https://desmid.github.io/mview/); tested with `mview_1.67`
+- [R](https://www.r-project.org/) and R/Bioconductor libraries `Biostrings`,
+`gridExtra`, `Rsamtools`, `tidyverse`; tested with `R_3.6.1`,
+`Biostrings_2.52.0`, `gridExtra_2.3`, `Rsamtools_2.0.3`, `tidyverse_1.3.0`
+- [samtools](http://www.htslib.org/); tested with `samtools_1.9`
 
 
 ## The NA12878 reference assembly
