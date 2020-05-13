@@ -28,6 +28,10 @@ sequences from the assembly.
 
 6. Show hits of transcribed rDNA regions across the assembly's contigs using
 `pygenometracks`.
+    <img src="./06_genome_plots/tig00002380_1-215000.png" width="600">
+    <img src="./06_genome_plots/tig00008215_1-154000.png" width="600">
+    <img src="./06_genome_plots/tig00008216_1-150000.png" width="600">
+    <img src="./06_genome_plots/tig00008411_1-310000.png" width="600">
 
 The current workflow consists of separate shell and R scripts in the individual
 main folders; for example `01_bowtie2_ref` has a shell script
@@ -81,7 +85,8 @@ University of Maryland.
 
 Further details and references:
 
-- The assembly consists of 1172 contigs with the following summary statistics
+- The assembly consists of 1172 contigs; contig sizes are summarised in the
+following statistics
     ```r
     #Min.  1st Qu.   Median     Mean  3rd Qu.     Max.
     #1006    31736   244367  2405237  1951710 51216920
@@ -90,7 +95,7 @@ Further details and references:
 - [Koren et al., Canu: scalable and accurate long-read assembly via adaptive k-mer weighting and repeat separation, Genome Research 27, 722 (2017)](https://genome.cshlp.org/content/27/5/722); latest release: [Canu v2.0](https://github.com/marbl/canu/releases)
 - [WTDBG: A fuzzy Bruijn graph approach to long noisy reads assembly](https://github.com/ruanjue/wtdbg); [Jue Ruan and Heng Li, Fast and accurate long-read assembly with wtdbg2, Nature Methods 17, 155 (202)](https://www.nature.com/articles/s41592-019-0669-3); latest release: [wtdbg2.5](https://github.com/ruanjue/wtdbg2); requires 1TB+ RAM
 - [Nanopolish](https://github.com/jts/nanopolish) by Jared Simpson et al. is a
-> [s]oftware package for signal-level analysis of Oxford Nanopore sequencing data. Nanopolish can calculate an improved consensus sequence for a draft genome assembly, detect base modifications, call SNPs and indels with respect to a reference genome and more.
+    > [s]oftware package for signal-level analysis of Oxford Nanopore sequencing data. Nanopolish can calculate an improved consensus sequence for a draft genome assembly, detect base modifications, call SNPs and indels with respect to a reference genome and more.
 
 
 ## Human ribosomal DNA sequence
