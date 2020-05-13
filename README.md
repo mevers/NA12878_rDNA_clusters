@@ -28,10 +28,10 @@ sequences from the assembly.
 
 6. Show hits of transcribed rDNA regions across the assembly's contigs using
 `pygenometracks`.
-    <img src="./06_genome_plots/tig00002380_1-215000.png" width="600">
-    <img src="./06_genome_plots/tig00008215_1-154000.png" width="600">
-    <img src="./06_genome_plots/tig00008216_1-150000.png" width="600">
-    <img src="./06_genome_plots/tig00008411_1-310000.png" width="600">
+    <img src="./06_genome_plots/tig00002380_1-215000.png" width="800">
+    <img src="./06_genome_plots/tig00008215_1-154000.png" width="800">
+    <img src="./06_genome_plots/tig00008216_1-150000.png" width="800">
+    <img src="./06_genome_plots/tig00008411_1-310000.png" width="800">
 
 The current workflow consists of separate shell and R scripts in the individual
 main folders; for example `01_bowtie2_ref` has a shell script
@@ -61,7 +61,11 @@ a BED file in `02_rDNA_frags/U13369.1_transcribed.bed`.
 `bowtie2_2.3.5.1`
 - [Clustal Omega](https://www.ebi.ac.uk/Tools/msa/clustalo/); tested with
 `clustalo_1.2.4`
+- [deepTools](https://deeptools.readthedocs.io/en/develop/); tested with
+`deeptools_3.4.3`
 - [MView](https://desmid.github.io/mview/); tested with `mview_1.67`
+- [pygenometracks](https://github.com/deeptools/pyGenomeTracks); tested with
+`pgt_3.3`
 - [R](https://www.r-project.org/) and R/Bioconductor libraries `Biostrings`,
 `gridExtra`, `Rsamtools`, `tidyverse`; tested with `R_3.6.1`,
 `Biostrings_2.52.0`, `gridExtra_2.3`, `Rsamtools_2.0.3`, `tidyverse_1.3.0`
