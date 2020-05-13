@@ -5,7 +5,7 @@
 clustalo \
 	-i ../04_rDNA_copies/putative_rDNA_seq_frags_len500_step500.fa \
 	-t DNA \
-	-o msa_putative_rDNA_seq_frags_len500_step500.clustal \
+	-o msa_putative_rDNA.clustal \
 	--outfmt clu \
 	--resno \
 	--wrap 60 \
@@ -28,7 +28,7 @@ clustalo \
 	-html head \
 	-css on \
 	-moltype dna \
-	msa_putative_rDNA_seq_frags_len500_step500.clustal > msa_putative_rDNA_seq_frags_len500_step500.html
+	msa_putative_rDNA.clustal > msa_putative_rDNA.html
 
 
 # MSA relative to U13369.1
