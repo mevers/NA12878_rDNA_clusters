@@ -1,5 +1,6 @@
 library(Rsamtools)
 library(tidyverse)
+library(gridExtra)
 
 bam <- list.files(
 	path = "../03_alignment",
@@ -17,9 +18,11 @@ df <- setNames(bam, id) %>%
 
 
 # Plot number of hits per contig
-df %>%
+df_sum <- df %>%
 	group_by(Data, rname) %>%
-	summarise(n_hits = n()) %>%
+	summarise(n_hits = n())
+gg1 <- df_sum %>%
+	filter(Data == id[1]) %>%
 	ggplot(aes(rname, n_hits)) +
 	geom_col() +
 	facet_wrap(~ Data) +
@@ -27,11 +30,24 @@ df %>%
 	scale_y_continuous(
 		sec.axis = sec_axis(
 			~ . * 500 / 43000,
-			name = "Rough rDNA copy number from crude inference")) + 
+			name = "Rough rDNA copy number from crude inference")) +
 	labs(x = "Contig", y = "Number of hits") +
 	theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
-ggsave("rDNA_frag_hits.pdf", width = 10, height = 6)
-
+gg2 <- df_sum %>%
+	filter(Data == id[2]) %>%
+	ggplot(aes(rname, n_hits)) +
+	geom_col() +
+	facet_wrap(~ Data) +
+	theme_minimal() +
+	scale_y_continuous(
+		sec.axis = sec_axis(
+			~ . / 7,
+			name = "Rough rDNA copy number from crude inference")) +
+	labs(x = "Contig", y = "Number of hits") +
+	theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
+gg <- grid.arrange(gg1, gg2, ncol = 2)
+ggsave("rDNA_frag_hits.pdf", gg, width = 10, height = 6)
+ggsave("rDNA_frag_hits.png", gg, width = 10, height = 6)
 
 
 # Read BED files and find the loci where the first 100 bp rDNA fragment
@@ -45,7 +61,7 @@ lst <- bed %>%
 	setNames(id) %>%
 	imap(~.x %>%
 		read_tsv(col_names = FALSE, col_types = "ciicic") %>%
-		filter(str_detect(X4, "pos0")) %>%
+		filter(str_detect(X4, "(pos0|5'ETS)")) %>%
 		group_by(X1) %>%
 		mutate(
 			start = if_else(X6 == "+", X2, lag(X3)),
