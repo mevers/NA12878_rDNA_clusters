@@ -1,6 +1,6 @@
 library(tidyverse)
 
-"../../03_alignment/rDNA_transcribed.bed" %>%
+"../../03_alignment/rDNA_roi.bed" %>%
 	read_tsv(col_names = FALSE, col_types = "ciicic") %>%
 	mutate(
 		X4 = str_remove_all(X4, "::.*$"),

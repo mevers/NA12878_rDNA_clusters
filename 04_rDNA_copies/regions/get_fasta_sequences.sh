@@ -1,7 +1,7 @@
 #!/bin/bash
 
 assembly="../../00_ref_sequences/assembly/albacore_canu_wtdbg_nanopolish2.fasta"
-rDNA="../../02_rDNA_frags/rDNA_transcribed.fa.gz"
+rDNA="../../02_rDNA_frags/rDNA_roi.fa.gz"
 
 for fn in *.bed; do
 	id=${fn/putative_rDNA_/}
