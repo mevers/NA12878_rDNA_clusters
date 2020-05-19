@@ -2,6 +2,34 @@
 
 # conda install -c bioconda clustalo
 
+# uCNE elements (with conservation >80%) in the 28S (LSU rRNA)
+# Reference: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4574749/
+uCNE=(
+	# >90% conserved
+	"CCGATAG"
+	"CCTAAG"
+	"CGTACC"
+	"TAACTT"
+	"GACTGTTTA"
+	"AAGACCC"
+	"TGGGGC"
+	"GGATAAC"
+	"GAGCTGGGTTTA"
+	"AGTACGAGAGGAAC"
+	# >80% conserved
+	"CTGGTTCCC"
+	"CAAACTC"
+	".{1}GTAACTAT"
+	"AC.{1}CTCTTAAGGTAGC"
+	"GCATGAA"
+	"ACTGTCCC"
+	"AGCTTTACT"
+	"TTG.{1}TACCTCGATGTCG"
+	"GACCGTCGTGAGACAGGT")
+function join_by { local IFS="$1"; shift; echo "$*"; }
+uCNE_string=$(join_by ":" "${uCNE[@]}")
+
+
 for fn in ../../04_rDNA_copies/regions/*.fa; do
 	bn=$(basename $fn)
 
@@ -35,7 +63,7 @@ for fn in ../../04_rDNA_copies/regions/*.fa; do
 	# Reference: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4574749/
 	if [[ $id == "28S" ]]; then
 		params+=(
-			"-find \"CCGATAG:CCTAAG:CGTACC:TAACTT:GACTGTTTA:AAGACCC:TGGGGC:GGATAAC:GAGCTGGGTTTA:AGTACGAGAGGAAC\""
+			"-find \"${uCNE_string}\""
 		)
 	# Highlight the fwd/rev RT-qPCR primers for 5'ETS and ITS1
 	# Reference: Rita Ferreira
