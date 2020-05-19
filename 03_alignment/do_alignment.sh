@@ -22,24 +22,12 @@ samtools sort -@ 4 \
 	-o rDNA_frags_len500_step500.bam unsorted_rDNA_frags_len500_step500.bam
 samtools sort -@ 4 \
 	-o rDNA_transcribed.bam unsorted_rDNA_transcribed.bam
+rm -f unsorted_rDNA_frags_len500_step500.bam
+rm -f unsorted_rDNA_transcribed.bam
 
 
 samtools index rDNA_frags_len500_step500.bam
 samtools index rDNA_transcribed.bam
-
-
-bamCoverage \
-	-b rDNA_frags_len500_step500.bam \
-	-o rDNA_frags_len500_step500.bw
-#bamCoverage \
-#	--samFlagExclude 16 \
-#	-b rDNA_frags_len500_step500.bam \
-#	-o rDNA_frags_len500_step500_pos.bw
-#bamCoverage \
-#	--samFlagInclude 16 \
-#	-b rDNA_frags_len500_step500.bam \
-#	-o rDNA_frags_len500_step500_neg.bw
-bamCoverage -b rDNA_transcribed.bam -o rDNA_transcribed.bw
 
 
 bedtools bamtobed -i rDNA_frags_len500_step500.bam > rDNA_frags_len500_step500.bed
