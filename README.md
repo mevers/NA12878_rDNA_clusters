@@ -1,6 +1,6 @@
 # rDNA clusters in the NA12878 consortium human genome assembly
 
-Version: 0.0.9000 (13 May 2020)  
+Version: 0.0.9000 (19 May 2020)  
 Author: Maurits Evers (maurits.evers@gmail.com)
 
 ## Workflow
@@ -9,8 +9,11 @@ The current workflow performs the following steps:
 
 1. Build a `bowtie2` index from the NA12878 assembly.
 2. Based on the U13369.1 rDNA reference sequence, align 500 bp long rDNA
-fragments and sequences based on the transcribed rDNA regions to the NA12878
-assembly. Store results as BAM, BigWig and BED files.
+fragments and sequences based on rDNA regions of interested to the NA12878
+assembly. Store results as sorted & indexed BAM and BED files. Regions of
+interest (ROI) include the transcribed regions 5'ETS, 18S, ITS1, 5.8S, ITS2,
+28S and 3'ETS, as well as a 500 bp wide region upstream of the 5'ETS (which
+includes the core promoter and upstream control elements).
 3. Plot the number of fragment hits across the assembly's contigs.
     <img src="./04_rDNA_copies/rDNA_frag_hits.png" width="600">
 
@@ -20,11 +23,15 @@ end is defined as the 5' start of the next rDNA unit. If it is the last rDNA
 unit in a cluster the 3' end is given by 5' start coordinate plus the average
 length of the preceding rDNA units. This information defines a list of putative
 rDNA loci in the assembly. We use this list to extract the corresponding
-sequences from the assembly.
+full rDNA unit sequences from the assembly.
     <img src="rDNA_unit_def.png" width="600">
 
-5. Perform a multiple sequence alignment of the putative rDNA sequences using
-`Clustal Omega` and visualise results using `MView`.
+5. From the rDNA ROI alignment, for every ROI extract a list with identified
+matches and their corresponding sequences.  
+
+5. Perform a multiple sequence alignment of the putative full rDNA sequences
+and rDNA ROI sequences using `Clustal Omega` and visualise results using
+`MView`.
 
 6. Show hits of transcribed rDNA regions across the assembly's contigs using
 `pygenometracks`.
