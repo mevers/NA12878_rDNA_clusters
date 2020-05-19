@@ -9,14 +9,14 @@ for fn in ../../04_rDNA_copies/regions/*.fa; do
 	id=${id/.fa/}
 	echo "Processing $id"
 
-#    clustalo \
-#    	-i $fn \
-#    	-t DNA \
-#    	-o msa_${bn%fa}clustal \
-#    	--outfmt clu \
-#    	--resno \
-#    	--wrap 60 \
-#    	-v
+    clustalo \
+    	-i $fn \
+    	-t DNA \
+    	-o msa_${bn%fa}clustal \
+    	--outfmt clu \
+    	--resno \
+    	--wrap 60 \
+    	-v
 
 	params=(
 		"-in clustal"
