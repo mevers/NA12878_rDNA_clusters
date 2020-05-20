@@ -1,6 +1,6 @@
 # rDNA clusters in the NA12878 consortium human genome assembly
 
-Version: 0.0.9000 (19 May 2020)  
+Version: 0.0.9000 (20 May 2020)  
 Author: Maurits Evers (maurits.evers@gmail.com)
 
 ## Workflow
@@ -26,12 +26,16 @@ rDNA loci in the assembly. We use this list to extract the corresponding
 full rDNA unit sequences from the assembly.
     <img src="rDNA_unit_def.png" width="600">
 
+    Results are stored in folder `04_rDNA_copies/complete_unit`.
+
 5. From the rDNA ROI alignment, for every ROI extract a list with identified
-matches and their corresponding sequences.  
+matches and their corresponding sequences. Results are stored in folder
+`04_rDNA_copies/regions`.
 
 5. Perform a multiple sequence alignment of the putative full rDNA sequences
 and rDNA ROI sequences using `Clustal Omega` and visualise results using
-`MView`.
+`MView`. Results are stored in `05_msa/complete_unit` and `05_msa/regions`,
+respectively.
 
 6. Show hits of transcribed rDNA regions across the assembly's contigs using
 `pygenometracks`.
